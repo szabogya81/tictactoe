@@ -123,17 +123,30 @@ function markWinnerColumn(columnIndex) {
 }
 
 function markWinnerDiagonals() {
-    let diagonals = getPlaygroundArrayDiagonals();
-    diagonals.forEach(diagonal => markWinnerDiagonal(diagonal));
+    let winnerIndexes = [4];
+    if( playgroundArray[0][0] === currentPlayerSymbol && 
+        playgroundArray[1][1] === currentPlayerSymbol && 
+        playgroundArray[2][2] === currentPlayerSymbol) {
+            winnerIndexes.push(0);
+            winnerIndexes.push(8);
+    }
+    if(playgroundArray[0][2] === currentPlayerSymbol && 
+       playgroundArray[1][1] === currentPlayerSymbol && 
+       playgroundArray[2][0] === currentPlayerSymbol) {
+            winnerIndexes.push(2);
+            winnerIndexes.push(6);
+    }
+    if(winnerIndexes.length > 2) {
+        markWinnerDiagonalDivs(winnerIndexes);
+    }
 }
 
-function markWinnerDiagonal(diagonal) {
-    if (diagonal.every(item => item === currentPlayerSymbol)) {      
-        Array.from(playgroundDivCells)
-            .filter(cell => diagonal.some(item => item === cell.tabIndex))
-            .forEach(diagCell => diagCell.classList.add('cell--winner'));
-        winnerExists = true;
-    }
+function markWinnerDiagonalDivs(winnerIndexes) {
+    Array.from(playgroundDivCells)
+         .filter(cell => winnerIndexes.includes(cell.tabIndex))
+         .forEach(diagCell => diagCell.classList.add('cell--winner'));
+    
+    winnerExists = true;
 }
 
 function getPlaygroundArrayColumn(columnIndex) {
@@ -142,11 +155,4 @@ function getPlaygroundArrayColumn(columnIndex) {
         columnArray.push(playgroundArray[i][columnIndex]);
     }
     return columnArray;
-}
-
-function getPlaygroundArrayDiagonals() {
-    return [
-        [playgroundArray[0][0], playgroundArray[1][1], playgroundArray[2][2]],
-        [playgroundArray[0][2], playgroundArray[1][1], playgroundArray[2][0]]
-    ];
 }
