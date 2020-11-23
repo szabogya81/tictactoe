@@ -6,46 +6,47 @@
     <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="column"></div>
-            <div class="column"></div>
-            <div class="column"></div>
+<body>  
+    <main class="main">
+        <div class="playground">
+            <div class="row">
+                <div class="cell cell--top-left" tabindex="0"></div>
+                <div class="cell" tabindex="1"></div>
+                <div class="cell cell--top-right" tabindex="2"></div>
+            </div>
+            <div class="row">
+                <div class="cell" tabindex="3"></div>
+                <div class="cell" tabindex="4"></div>
+                <div class="cell" tabindex="5"></div>
+            </div>
+            <div class="row">
+                <div class="cell cell--bottom-left" tabindex="6"></div>
+                <div class="cell" tabindex="7"></div>
+                <div class="cell cell--bottom-right" tabindex="8"></div>
+            </div>
         </div>
-        <div class="row">
-            <div class="column"></div>
-            <div class="column"></div>
-            <div class="column"></div>
+        <div class="info">
+            <article>
+                <h3>Játékszabályok:</h3>
+                <p>
+                    Két játékos játszhatja. Az egyik a “0” a másik az “X” jelet használja játék közben. 
+                    A játékosok felváltva lépnek, azaz helyeznek el egy-egy jelet a 3x3-as táblázat egy cellájában. 
+                    Az a játékos győz, akinek előbb sikerül egymás alatt, mellett, vagy átlósan elhelyezni a 3 azonos jelet.
+                </p>
+            </article>
+            <article>
+                <h3>Aktuális játékos:</h3>
+                <label class="label-player1 label--active">Játékos 1: (O) </label>
+                <label class="label-player2">Játékos 2: (X) </label>
+            </article>
+            <article>
+                <h3>Eredmény:</h3>
+                <label class="label--result">-</label>
+                <button class="button-newGame">
+                    Új játék
+                </button>
+            </article>
         </div>
-        <div class="row">
-            <div class="column"></div>
-            <div class="column"></div>
-            <div class="column"></div>
-        </div>
-    </div>
-
-    <main>
-        <article>
-            <h3>Játékszabályok:</h3>
-            <p class="rules">
-                Két játékos játszhatja. Az egyik a “0” a másik az “X” jelet használja játék közben. 
-                A játékosok felváltva lépnek, azaz helyeznek el egy-egy jelet a 3x3-as táblázat egy cellájában. 
-                Az a játékos győz, akinek előbb sikerül egymás alatt, mellett, vagy átlósan elhelyezni a 3 azonos jelet.
-            </p>
-        </article>
-        <article class="article--dynamic">
-            <h3>Aktuális játékos:</h3>
-            <label class="label--active">Játékos 1: (0) </label>
-            <label>Játékos 2: (X) </label>
-        </article>
-        <article class="article--dynamic">
-            <h3>Eredmény:</h3>
-            <label class="label--result">ghjghj</label>
-            <button class="button-newGame">
-                Új játék
-            </button>
-        </article>
     </main>
 
     <script src="tictactoe.js"></script>
