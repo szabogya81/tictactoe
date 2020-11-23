@@ -1,0 +1,47 @@
+.container{
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    width: 24rem;
+}
+
+.column {
+    border: 1px solid white;
+    box-sizing: border-box;
+    font-size: 2rem;
+    height: 8rem;
+    line-height: 4rem;
+    margin: 0;
+    padding: 2rem;
+    text-align: center;
+    width: 8rem;
+}
+
+.rules {
+    width: 24rem;
+}
+
+.label--active {
+    background-color: tomato;
+    color: white;
+}
+
+.article--dynamic {
+    display: grid;
+    width: 24rem;
+}
+
+.label--result {
+    background-color: rgb(23, 143, 93);
+    color: white;
+}
+
+.button-newGame {
+    height: 2rem;
+    margin-top: 2rem;
+    margin-left: 9rem;
+    width: 6rem;
+}

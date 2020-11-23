@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="column"></div>
+            <div class="column"></div>
+            <div class="column"></div>
+        </div>
+        <div class="row">
+            <div class="column"></div>
+            <div class="column"></div>
+            <div class="column"></div>
+        </div>
+        <div class="row">
+            <div class="column"></div>
+            <div class="column"></div>
+            <div class="column"></div>
+        </div>
+    </div>
+
+    <main>
+        <article>
+            <h3>Játékszabályok:</h3>
+            <p class="rules">
+                Két játékos játszhatja. Az egyik a “0” a másik az “X” jelet használja játék közben. 
+                A játékosok felváltva lépnek, azaz helyeznek el egy-egy jelet a 3x3-as táblázat egy cellájában. 
+                Az a játékos győz, akinek előbb sikerül egymás alatt, mellett, vagy átlósan elhelyezni a 3 azonos jelet.
+            </p>
+        </article>
+        <article class="article--dynamic">
+            <h3>Aktuális játékos:</h3>
+            <label class="label--active">Játékos 1: (0) </label>
+            <label>Játékos 2: (X) </label>
+        </article>
+        <article class="article--dynamic">
+            <h3>Eredmény:</h3>
+            <label class="label--result">ghjghj</label>
+            <button class="button-newGame">
+                Új játék
+            </button>
+        </article>
+    </main>
+
+    <script src="tictactoe.js"></script>
+</body>
+</html>
