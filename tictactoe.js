@@ -1,5 +1,5 @@
+const playgroundArray = [[,,,], [,,,], [,,,]];
 let currentPlayerSymbol = 'O';
-let playgroundArray = [[,,,], [,,,], [,,,]];
 let winnerExists = false;
 
 const playgroundDivCells = document.querySelectorAll('.cell');
