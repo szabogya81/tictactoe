@@ -1,5 +1,5 @@
 let currentPlayerSymbol = 'O';
-let playgroundArray = [];
+let playgroundArray = [[,,,], [,,,], [,,,]];
 let winnerExists = false;
 
 const playgroundDivCells = document.querySelectorAll('.cell');
@@ -20,16 +20,14 @@ function initialize() {
 }
 
 function initPlaygroundArray() {
-    playgroundArray = [
-        [null, null, null],
-        [null, null, null],
-        [null, null, null]
-    ]
+    playgroundArray.forEach(row => row.fill(null));
 }
 function initPlaygroundDivCells() {
     playgroundDivCells.forEach(cell => cell.addEventListener('click', handleCellClick));
+    playgroundDivCells.forEach(cell => cell.addEventListener('keypress', handleCellKeyPress));
     playgroundDivCells.forEach(cell => cell.textContent = '' );
     playgroundDivCells.forEach(cell => cell.classList.remove('cell--winner'));
+    playgroundDivCells[0].focus();
 }
 
 function initLabels() {
@@ -54,15 +52,22 @@ function handleCellClick(e) {
         } else {
             showWinner();
         }
-    };
+    }
 }
 
-function setAndCheckPlaygroundArray(divIndex){
-    let rowIndex = Math.floor(divIndex / 3);
-    let columnIndex = divIndex % 3;
+function handleCellKeyPress(e) {
+    if(e.keyCode == 13) {
+        handleCellClick(e);
+    }
+}
+
+
+function setAndCheckPlaygroundArray(divTabIndex){
+    let rowIndex = Math.floor((divTabIndex - 1) / 3);
+    let columnIndex = (divTabIndex - 1) % 3;
 
     playgroundArray[rowIndex][columnIndex] = currentPlayerSymbol;
-    checkAndHandleWinner(divIndex, rowIndex, columnIndex);
+    checkAndHandleWinner(divTabIndex - 1, rowIndex, columnIndex);
 }
 
 function swapPlayer() {
@@ -84,6 +89,7 @@ function showDraw() {
 
 function showWinner(){
     playgroundDivCells.forEach(cell => cell.removeEventListener('click', handleCellClick));
+    playgroundDivCells.forEach(cell => cell.removeEventListener('keypress', handleCellKeyPress));
     currentPlayerSymbol === 'O' ? 
         resultLabel.textContent =  playerLabel1.textContent + ' Nyert!' : 
         resultLabel.textContent =  playerLabel2.textContent + ' Nyert!';
@@ -97,8 +103,7 @@ function checkAndHandleWinner(divIndex, rowIndex, columnIndex) {
     if(getPlaygroundArrayColumn(columnIndex).every(item => item === currentPlayerSymbol)) {
         markWinnerColumn(columnIndex);
     }
-    if (divIndex % 2 === 0) {
-        
+    if (divIndex % 2 === 0) {       
         markWinnerDiagonals();
     }
 }
@@ -106,7 +111,7 @@ function checkAndHandleWinner(divIndex, rowIndex, columnIndex) {
 function markWinnerRow(rowIndex) {
     playgroundDivCells
         .forEach(cell => {
-                if(cell.tabIndex >= rowIndex * 3 && cell.tabIndex < rowIndex * 3 + 3)
+                if(cell.tabIndex - 1 >= rowIndex * 3 && cell.tabIndex - 1 < rowIndex * 3 + 3)
                     cell.classList.add('cell--winner')
             });
     
@@ -116,7 +121,7 @@ function markWinnerRow(rowIndex) {
 function markWinnerColumn(columnIndex) {
     playgroundDivCells
         .forEach(cell => {
-                if(cell.tabIndex % 3 === columnIndex % 3)
+                if((cell.tabIndex - 1) % 3 === columnIndex % 3)
                     cell.classList.add('cell--winner')
             });
     winnerExists = true;
@@ -124,13 +129,16 @@ function markWinnerColumn(columnIndex) {
 
 function markWinnerDiagonals() {
     let winnerIndexes = [4];
-    let diagonals = getPlaygroundArrayDiagonals();
-    
-    if(diagonals[0].every(item => item === currentPlayerSymbol)) {
+
+    if(playgroundArray
+        .map((item, index) => item[index])
+        .every(item => item === currentPlayerSymbol)) {
             winnerIndexes.push(0);
             winnerIndexes.push(8);
     }
-    if(diagonals[1].every(item => item === currentPlayerSymbol)) {
+    if(playgroundArray
+        .map((item, index) => item[(-index + 2) % 3])
+        .every(item => item === currentPlayerSymbol)) {
             winnerIndexes.push(2);
             winnerIndexes.push(6);
     }
@@ -142,7 +150,7 @@ function markWinnerDiagonals() {
 function markWinnerDiagonalDivs(winnerIndexes) {
     playgroundDivCells
          .forEach(diagCell => {
-             if(winnerIndexes.includes(diagCell.tabIndex)) { 
+             if(winnerIndexes.includes(diagCell.tabIndex - 1)) { 
                  diagCell.classList.add('cell--winner');
                 }});
     
@@ -155,11 +163,4 @@ function getPlaygroundArrayColumn(columnIndex) {
         columnArray.push(playgroundArray[i][columnIndex]);
     }
     return columnArray;
-}
-
-function getPlaygroundArrayDiagonals() {
-    return [
-        [playgroundArray[0][0], playgroundArray[1][1], playgroundArray[2][2]],
-        [playgroundArray[0][2], playgroundArray[1][1], playgroundArray[2][0]]
-    ];
 }
