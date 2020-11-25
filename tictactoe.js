@@ -1,3 +1,5 @@
+'use strict';
+
 const playgroundArray = [[,,,], [,,,], [,,,]];
 let currentPlayerSymbol = 'O';
 let winnerExists = false;
@@ -25,7 +27,7 @@ function initPlaygroundArray() {
 function initPlaygroundDivCells() {
     playgroundDivCells.forEach(cell => cell.addEventListener('click', handleCellClick));
     playgroundDivCells.forEach(cell => cell.addEventListener('keypress', handleCellKeyPress));
-    playgroundDivCells.forEach(cell => cell.textContent = '' );
+    playgroundDivCells.forEach(cell => cell.textContent = '');
     playgroundDivCells.forEach(cell => cell.classList.remove('cell--winner'));
     playgroundDivCells[0].focus();
 }
@@ -61,8 +63,7 @@ function handleCellKeyPress(e) {
     }
 }
 
-
-function setAndCheckPlaygroundArray(divTabIndex){
+function setAndCheckPlaygroundArray(divTabIndex) {
     let rowIndex = Math.floor((divTabIndex - 1) / 3);
     let columnIndex = (divTabIndex - 1) % 3;
 
@@ -71,7 +72,7 @@ function setAndCheckPlaygroundArray(divTabIndex){
 }
 
 function swapPlayer() {
-    if(currentPlayerSymbol === 'O'){
+    if(currentPlayerSymbol === 'O') {
         currentPlayerSymbol = 'X';
         playerLabel1.classList.remove('label--active');
         playerLabel2.classList.add('label--active');
@@ -87,7 +88,7 @@ function showDraw() {
     resultLabel.classList.add('label-result--filled');
 }
 
-function showWinner(){
+function showWinner() {
     playgroundDivCells.forEach(cell => cell.removeEventListener('click', handleCellClick));
     playgroundDivCells.forEach(cell => cell.removeEventListener('keypress', handleCellKeyPress));
     currentPlayerSymbol === 'O' ? 
